@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+ <div class="container mt-5 mb-5">
+        <div class="row">
+            {# <div class="col-md-4 col-md-offset-4"> #}
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                          {% if editMode %}
+                          Modifier vos informations
+                          {% else %}
+                            Créer votre profil
+                          {% endif %}
+                        </h3>
+                    </div>
+                      <div class="panel-body mt-5">
+                      {{ form_start(formProfil) }}
+                      {{ form_row(formProfil.imageFile, {'attr':{'placeholder':"Votre photo"}}) }} 
+                      {{ form_row(formProfil.titre, {'attr':{'placeholder':"Votre titre"}}) }}
+                      {{ form_row(formProfil.nom, {'attr':{'placeholder':"Votre nom"}}) }}
+                      {{ form_row(formProfil.prenom, {'attr':{'placeholder':"Votre prenom"}}) }}
+                      {{ form_row(formProfil.dateNais)}}
+                      {{ form_row(formProfil.pays)}}
+                      {{ form_row(formProfil.adresse)}}
+                      {{ form_row(formProfil.telephone)}}
+
+                      <button type="submit" class="btn btn-success">
+                      {% if editMode %}
+                        Modifier
+                      {% else %}
+                        Enregistrer
+                        {% endif %}
+                      </button>
+                    {{ form_end(formProfil) }}  
+                   </div>
+                </div>
+            {# </div> #}
+            <div class="col-md-6 col-md-offset-6">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                          un titre
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                     <p>
+                       loremIncididunt officia dolor incididunt ut. Et cillum velit deserunt pariatur irure. Magna commodo 
+                       sunt officia ipsum ex nulla excepteur sint aliquip. Commodo est dolore adipisicing cillum ipsum minim.
+                       Esse ex quis proident aliquip consectetur sint culpa labore amet mollit labore. Mollit incididunt 
+                       excepteur sint 
+                       adipisicing deserunt ea et cillum laborum adipisicing. Consectetur laboris veniam ut amet ex.
+                       loremIncididunt officia dolor incididunt ut. Et cillum velit deserunt pariatur irure. Magna commodo 
+                       sunt officia ipsum ex nulla excepteur sint aliquip. Commodo est dolore adipisicing cillum ipsum minim.
+                       Esse ex quis proident aliquip consectetur sint culpa labore amet mollit labore. Mollit incididunt 
+                       excepteur sint 
+                       adipisicing deserunt ea et cillum laborum adipisicing. Consectetur laboris veniam ut amet ex.
+                     <p> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

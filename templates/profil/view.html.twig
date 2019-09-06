@@ -1,0 +1,397 @@
+{% extends 'base.html.twig' %}
+
+{% block Addstylesheets %}
+    <!-- Add stylesheet -->
+
+    <link href="{{ asset('css/viewprofil/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/viewprofil/flaticon.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/viewprofil/owl.carousel.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/viewprofil/magnific-popup.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/viewprofil/style.css') }}" rel="stylesheet">
+
+{% endblock %}
+
+{% block slider %}
+    <!-- hide header -->
+
+{% endblock %}
+
+{% block body %}
+    <!-- overwrite body -->
+
+    {% if profil %}
+
+        <!-- Page Preloder -->
+        {# <div id="preloder">
+            <div class="loader"></div>
+        </div> #}
+
+        <!-- Header section start -->
+        <header class="header-section my-5">
+            <div class="container-fluid mt-5">
+                <div class="row">
+                    <div class="col-md-8 text-md-right header-buttons">
+                        <a href="{{ path('cv_pdf',{'id':profil.id}) }}" class="site-btn">Telecharger le CV</a>
+                        <a href="#" class="site-btn">Discover me</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header section end -->
+
+        <!-- Hero section start -->
+        <section class="hero-section spad">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-10 offset-xl-1">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="hero-text">
+                                    <h3>{{profil.nom}}
+                                        {{profil.prenom}}</h3>
+                                    <p>{{profil.titre}}</p>
+                                </div>
+                                <div class="hero-info">
+                                    <h3 class="mt-3">Information Personnelle</h3>
+                                    <ul>
+                                        <li>
+                                            <span>Date de naissance:</span>{{profil.dateNais | date}}</li>
+                                        <li>
+                                            <span>Adresse:</span>{{profil.adresse}}</li>
+                                        <li>
+                                            <span>E-mail:</span>
+                                            {{profil.UserId.email}}
+                                        </li>
+                                        {% if profil.telephone %}
+                                            <li>
+                                                <span>Telephone:</span>
+                                                {{profil.telephone}}
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <figure class="hero-image">
+                                    <img src="{{vich_uploader_asset(profil,'imageFile') }}" style=" width:auto; height:512px;" alt="5">
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Hero section end -->
+
+        {# <!-- Social links section start -->
+        <div class="social-section">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-10 offset-xl-1">
+                        <div class="social-link-warp">
+                            <div class="social-links">
+                                <a href=""><i class="fa fa-pinterest"></i></a>
+                                <a href=""><i class="fa fa-linkedin"></i></a>
+                                <a href=""><i class="fa fa-instagram"></i></a>
+                                <a href=""><i class="fa fa-facebook"></i></a>
+                                <a href=""><i class="fa fa-twitter"></i></a>
+                            </div>
+                            <h2 class="hidden-md hidden-sm">My Social Profiles</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>	
+        <!-- Social links section end --> #}
+
+        <!-- Resume section start -->
+        <section class="resume-section spad">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-7 offset-xl-2">
+                        <div class="section-title">
+                            <h2>Experience</h2>
+                        </div>
+                        <ul class="resume-list">
+                            {% for experience in profil.experience %}
+                                {% if profil.experience is empty %}
+                                    <li>
+                                        <h2>Aucune expérience</h2>
+                                    </li>
+                                {% endif %}
+                                <li>
+                                    <h2>
+                                        {{experience.debut | date('Y') }}
+                                        -
+                                        {% if experience.fin %}
+                                            {{experience.fin | date('Y') }}
+                                        {% else %}
+                                            Present
+                                        {% endif %}
+                                    </h2>
+                                    <h3>
+                                        {{experience.entreprise}}
+                                    </h3>
+                                    <h4>{{experience.poste}}
+                                    </h4>
+                                    <p>
+                                        {% if experience.description %}
+                                            {{experience.description}}
+                                        {% endif %}
+                                    </p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Resume section end -->
+
+        <!-- Resume diplome start -->
+        <section class="resume-section with-bg spad">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-7 offset-xl-2">
+                        <div class="section-title">
+                            <h2>Education</h2>
+                        </div>
+                        <ul class="resume-list">
+                            {% if profil.diplome is defined %}
+                                {% for diplome in profil.diplome %}
+                                    <li>
+                                        <h2>
+                                            {{diplome.date | date('Y')}}
+                                        </h2>
+                                        <h3>
+                                            {{diplome.titre}}
+                                        </h3>
+                                        <h4>
+                                            {{diplome.institut}}
+                                        </h4>
+                                        <p>
+                                            {{diplome.description}}
+                                        </p>
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                <li>
+                                    <h2>Aucun diplome</h2>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Resume section end -->
+
+        <!-- Review section start -->
+        <section class="review-section spad pb-0">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-7 offset-xl-2">
+                        <div class="section-title">
+                            <h2>References</h2>
+                        </div>
+                        <div class="review-slider owl-carousel">
+                            <div class="single-review">
+                                <div class="qut">“</div>
+                                <p>Sit amet, consectetur adipiscing elit. Sed porttitor orci ut sapien scelerisque viverra. Sed trist ique justo nec mauris efficitur, ut lacinia elit dapibus. In egestas elit in dap ibus laoreet. Duis magna libero, fermentum ut facilisis id, pulvinar eget tortor. Vestibulum pelle ntesque tincidunt lorem, vitae euismod felis porttitor sed.
+                                </p>
+                                <h3>Robert G. Smith</h3>
+                                <h4>Manager, Company</h4>
+                            </div>
+                            <div class="single-review">
+                                <div class="qut">“</div>
+                                <p>Sit amet, consectetur adipiscing elit. Sed porttitor orci ut sapien scelerisque viverra. Sed trist ique justo nec mauris efficitur, ut lacinia elit dapibus. In egestas elit in dap ibus laoreet. Duis magna libero, fermentum ut facilisis id, pulvinar eget tortor. Vestibulum pelle ntesque tincidunt lorem, vitae euismod felis porttitor sed.
+                                </p>
+                                <h3>Robert G. Smith</h3>
+                                <h4>Manager, Company</h4>
+                            </div>
+                            <div class="single-review">
+                                <div class="qut">“</div>
+                                <p>Sit amet, consectetur adipiscing elit. Sed porttitor orci ut sapien scelerisque viverra. Sed trist ique justo nec mauris efficitur, ut lacinia elit dapibus. In egestas elit in dap ibus laoreet. Duis magna libero, fermentum ut facilisis id, pulvinar eget tortor. Vestibulum pelle ntesque tincidunt lorem, vitae euismod felis porttitor sed.
+                                </p>
+                                <h3>Robert G. Smith</h3>
+                                <h4>Manager, Company</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Review section end -->
+
+        <!-- Portfolio section start -->
+        <section class="portfolio-section spad pb-0">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-4 col-md-8 offset-xl-2 ">
+                        <div class="section-title">
+                            <h2>Languages</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-md-right">
+                        <a href="#" class="site-btn mb-5">See All Portfolio</a>
+                    </div>
+                </div>
+                <div class="portfolio-warp">
+                    <div class="row">
+                        {% for language in languages %}
+                            <div class="col-xl-3 col-lg-6 col-md-6">
+                                <div class="portfolio-item">
+                                    <img src="{{vich_uploader_asset(language.languageId,'imageFile') }}" class="set-bg port-pic"/>
+                                    <h2>{{language.languageId.nom}}</h2>
+                                    <p>
+                                        {{language.niveau}}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="portfolio-item">
+                                <a href="img/portfolio/2.jpg" class="set-bg port-pic" data-setbg="img/portfolio/2.jpg"></a>
+                                <h2>A Corporate Identity</h2>
+                                <p>Graphic design</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="portfolio-item">
+                                <a href="img/portfolio/3.jpg" class="set-bg port-pic" data-setbg="img/portfolio/3.jpg"></a>
+                                <h2>Web Design Website</h2>
+                                <p>Graphic design</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="portfolio-item">
+                                <a href="img/portfolio/4.jpg" class="set-bg port-pic" data-setbg="img/portfolio/4.jpg"></a>
+                                <h2>Logo design</h2>
+                                <p>Graphic design</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Portfolio section end -->
+
+        <!-- Extra section start -->
+        <section class="extra-section spad pb-0">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-8 offset-xl-2">
+                        <div class="section-title">
+                            <h2>Extra Skills</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 pt-5">
+                                <div class="fact-box trans">
+                                    <div class="fact-content">
+                                        <div class="circle-progress">
+                                            <div id="progress1" class="prog-circle"></div>
+                                            <div class="progress-info">
+                                                <h2>75%</h2>
+                                            </div>
+                                            <div class="prog-title">
+                                                <h3>Inspiration</h3>
+                                                <p>Etiam nec odio vestibulum est.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 pt-5">
+                                <div class="fact-box trans">
+                                    <div class="fact-content">
+                                        <div class="circle-progress">
+                                            <div id="progress2" class="prog-circle"></div>
+                                            <div class="progress-info">
+                                                <h2>83%</h2>
+                                            </div>
+                                            <div class="prog-title">
+                                                <h3>Inspiration</h3>
+                                                <p>Etiam nec odio vestibulum est.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="fact-box">
+                                    <div class="fact-content">
+                                        <img src="img/icon/1-w.png" alt="">
+                                        <h2>14</h2>
+                                        <p>Years of Experience</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="fact-box">
+                                    <div class="fact-content">
+                                        <img src="img/icon/2-w.png" alt="">
+                                        <h2>9</h2>
+                                        <p>Awards Won</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Extra section end -->
+
+        <!-- Contact section start -->
+        <section class="contact-section spad">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-8 offset-xl-2">
+                        <div class="section-title">
+                            <h2>Contactez le developpeur</h2>
+                            {% for message in app.flashes('success') %}
+                                <div class="alert alert-success">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            {% for message in app.flashes('error') %}
+                                <div class="alert alert-danger">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {{ form_start(formContact) }}
+                        {{ form_row(formContact.name, {'attr':{'placeholder':"John Doe",'label':"Nom"}}) }}
+                        {{ form_row(formContact.email, {'attr':{'placeholder':"noreply@firedev.com",'label':"Adresse email"}}) }}
+                        {{ form_row(formContact.phone, {'attr':{'placeholder':"+237 698543256",'label':"Télephone"}}) }}
+                        {{ form_row(formContact.message, {'attr':{'placeholder':"Votre message",'label':"Message"}}) }}
+                        <button type="submit" class="btn btn-success">Envoyer</button>
+                        {{ form_end(formContact) }}
+                        {# <form class="contact-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="Name">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="E-mail">
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" placeholder="Subject">
+                                    <textarea placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="text-md-right">
+                                <button class="site-btn">Send message</button>
+                            </div>
+                        </form> #}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    {% else %}
+        <h1>Vous n'avez pas encore renseigner votre profil</h1>
+        <button type="submit" class="btn btn-primary">Créer votre profil</button>
+    {% endif %}
+
+{% endblock %}

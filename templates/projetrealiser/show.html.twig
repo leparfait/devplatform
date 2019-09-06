@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projetrealiser{% endblock %}
+
+{% block body %}
+    <h1>Projetrealiser</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ projetrealiser.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ projetrealiser.titre }}</td>
+            </tr>
+            <tr>
+                <th>Datedebut</th>
+                <td>{{ projetrealiser.datedebut ? projetrealiser.datedebut|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Datefin</th>
+                <td>{{ projetrealiser.datefin ? projetrealiser.datefin|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ projetrealiser.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('projetrealiser_index') }}">back to list</a>
+
+    <a href="{{ path('projetrealiser_edit', {'id': projetrealiser.id}) }}">edit</a>
+
+    {{ include('projetrealiser/_delete_form.html.twig') }}
+{% endblock %}

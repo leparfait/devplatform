@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MediaVideo index{% endblock %}
+
+{% block body %}
+    <h1>MediaVideo index</h1>
+
+    <section class="bg-light" id="portfolio">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <h2 class="section-heading text-uppercase">Video tutoriel</h2>
+              <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+            </div>
+          </div>
+          <div class="row">
+            {% for media_video in media_videos %}
+            <div class="col-md-4 col-sm-6 portfolio-item">
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ media_video.image() }}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Source : {{media_video.type}}</h5>
+                  <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maxime rem repellat molestiae esse</p>
+                  <a href="{{ path('media_video_show', {'id': media_video.id}) }}" class="btn btn-primary">Voir la video</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+      <div class="text-center">
+        <a href="{{ path('media_video_new') }}" class="center-block mb-5 btn btn-outline-primary">Ajouter une nouvelle video</a>
+      </div>
+{% endblock %}

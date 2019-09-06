@@ -1,0 +1,148 @@
+<page backtop="7mm" backbottom="7mm" backleft="10mm" backright="10mm">
+    <page_header></page_header>
+    <page_footer></page_footer>
+    {% if profil %}
+        <!-- Hero section start -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-10 offset-xl-1">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="hero-text">
+                                    <h3>{{profil.nom}}
+                                        {{profil.prenom}}</h3>
+                                    <p>{{profil.titre}}</p>
+                                </div>
+                                <div class="hero-info">
+                                    <h3 class="mt-3">Information Personnelle</h3>
+                                    <ul>
+                                        <li>
+                                            <span>Date de naissance:</span>{{profil.dateNais | date}}</li>
+                                        <li>
+                                            <span>Adresse:</span>{{profil.adresse}}</li>
+                                        <li>
+                                            <span>E-mail:</span>
+                                            {{profil.UserId.email}}
+                                        </li>
+                                        {% if profil.telephone %}
+                                            <li>
+                                                <span>Telephone:</span>
+                                                {{profil.telephone}}
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="hero-image">
+                                    {# <img src="{{vich_uploader_asset(profil,'imageFile') }}" alt="5"> #}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Resume section start -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-7 offset-xl-2">
+                        <div class="section-title">
+                            <h2>Languages</h2>
+                        </div>
+                        <ul class="resume-list">
+                            {% for language in profil.language %}
+                                {% if language is empty %}
+                                    <li>
+                                        <h2>Aucune Language de programmation</h2>
+                                    </li>
+                                {% endif %}
+                                <li>
+                                    <h2>
+                                        {{language.languageId.nom}}
+                                    </h2>
+                                    <h4>
+                                        {{language.niveau}}
+                                    </h4>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-7 offset-xl-2">
+                        <div class="section-title">
+                            <h2>Experience</h2>
+                        </div>
+                        <ul class="resume-list">
+                            {% for experience in profil.experience %}
+                                {% if profil.experience is empty %}
+                                    <li>
+                                        <h2>Aucune expérience</h2>
+                                    </li>
+                                {% endif %}
+                                <li>
+                                    <h2>
+                                        {{experience.debut | date('Y') }}
+                                        -
+                                        {% if experience.fin %}
+                                            {{experience.fin | date('Y') }}
+                                        {% else %}
+                                            Present
+                                        {% endif %}
+                                    </h2>
+                                    <h3>
+                                        {{experience.entreprise}}
+                                    </h3>
+                                    <h4>{{experience.poste}}
+                                    </h4>
+                                    <p>
+                                        {% if experience.description %}
+                                            {{experience.description}}
+                                        {% endif %}
+                                    </p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        <!-- Resume section end -->
+
+        <!-- Resume diplome start -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-7 offset-xl-2">
+                        <div class="section-title">
+                            <h2>Education</h2>
+                        </div>
+                        <ul class="resume-list">
+                            {% if profil.diplome is defined %}
+                                {% for diplome in profil.diplome %}
+                                    <li>
+                                        <h2>
+                                            {{diplome.date | date('Y')}}
+                                        </h2>
+                                        <h3>
+                                            {{diplome.titre}}
+                                        </h3>
+                                        <h4>
+                                            {{diplome.institut}}
+                                        </h4>
+                                        <p>
+                                            {{diplome.description}}
+                                        </p>
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                <li>
+                                    <h2>Aucun diplome</h2>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    {% endif %}
+    <!-- Resume section end -->
+</page>

@@ -5,6 +5,10 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'fr'
+    app.path.annonce_images: /images/annonce
+    app.path.language_images: /images/language
+    app.path.users_images: /images/users
+    app.path.document: /document
 
 services:
     # default configuration for services in *this* file
@@ -29,3 +33,10 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    # App\EventListener\ExceptionListener:
+    #     tags:
+    #         - { name: kernel.event_listener, event: kernel.exception }
+
+    App\EventListener\ProfilConsultListener:
+        tags:
+            - { name: kernel.event_listener, event: alert.profil_view }

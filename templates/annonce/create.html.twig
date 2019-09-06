@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+   {% if editMode %}
+     <h1>Modifications d'une annonce</h1>
+   {% else %}
+     <h1>Ajout d'une annonce</h1>
+   {% endif %}
+   
+
+  {{ form_start(formAnnonce) }}
+
+  {{ form_row(formAnnonce.titre, {'attr':{'placeholder':"Titre de l\'annonce"}}) }}
+  {{ form_row(formAnnonce.imageFile) }}
+  {{ form_row(formAnnonce.explication, {'attr':{'placeholder':"contenu de l\'annonce"}}) }} 
+  {{ form_row(formAnnonce.degre, {'attr':{'placeholder':"Votre photo"}}) }} 
+
+
+  <button type="submit" class="btn btn-success">
+   {% if editMode %}
+     Modifier
+   {% else %}
+     Ajouter
+    {% endif %}
+  </button>
+
+  {{ form_end(formAnnonce) }}  
+
+{% endblock %}

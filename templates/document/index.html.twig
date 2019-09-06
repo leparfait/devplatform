@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Document{% endblock %}
+
+{% block body %}
+    <h3 class="mt-5">Documents disponible</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                {# <th>Id</th> #}
+                <th>Nom</th>
+                <th>Reference</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for document in documents %}
+                <tr>
+                    {# <td>{{ document.id }}</td> #}
+                    <td>
+                        {{ document.nom }}
+                    </td>
+                    <td>
+                        <a class="btn-outline-info" href="">
+                            {{ document.reference }}
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-info" href="{{ path('document_show', {'id': document.id}) }}">show</a>
+                        {# <a class="btn btn-outline-secondary" href="{{ path('document_edit', {'id': document.id}) }}">edit</a> #}
+                        <a class="btn btn-outline-danger" href="{{ path('document_download', {'id': document.id}) }}">telecharger</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-info mb-5" href="{{ path('document_new') }}">Create new</a>
+{% endblock %}

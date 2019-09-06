@@ -1,7 +1,20 @@
 # app/config/routing.yml
+index:
+   path: /
+   controller: App\Controller\AcceuilController::index
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group
     
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /admin

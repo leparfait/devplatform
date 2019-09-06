@@ -4,5 +4,22 @@ fos_user:
     firewall_name: main
     user_class: App\Entity\User
     from_email:
-        address: "parfait.onana50@gmail.com"
-        sender_name: "Firedev Team"
+        address: parfait.onana50@gmail.com
+        sender_name: Firedev Team
+    service:
+        mailer: fos_user.mailer.twig_swift
+    registration:
+        confirmation:
+            enabled: true
+            from_email:
+                address: parfait.onana50@gmail.com
+                sender_name: Firedev Team
+            # template:   '@FOSUser/Registration/email.txt.twig'
+    resetting:
+        email:
+            from_email:
+                address:        parfait.onana50@gmail.com
+                sender_name:    Firedev Team
+            # template:   emails/password_resetting.email.twig
+    group:
+        group_class: App\Entity\Groupe

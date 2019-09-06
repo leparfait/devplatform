@@ -1,0 +1,394 @@
+{% extends 'base.html.twig' %}
+
+    {% block Addstylesheets %}
+     <!-- Custom styles for this page -->
+      {# <link href="{{ asset('css/bootstrap4/css/bootstrap.min.css') }}" rel="stylesheet"> #}
+    {% endblock %}
+
+    {% block slider %}
+    <!-- hide header -->
+
+    {% endblock %}
+
+    {% block body %}
+      {% if profil %}
+        <hr>
+        <div class="container bootstrap snippet mt-5 mb-5">
+          <div class="row mt-5"> <!-- first row -->
+            <div class="col-sm-10">
+             {# <h1> 
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                 {{ app.user.username }}
+                {% else %}
+                 user name  
+                {% endif %}
+             </h1> #}
+            </div>
+            <div class="col-sm-2"><a href="{{ path('fos_user_security_logout')}}" class="pull-right"><img title="deconnexion" class="img-circle" src="{{asset('img/logout.jpg')}}"></a></div>
+          </div> <!-- end first row -->
+
+          <div class="row mt-5"><!-- second row -->
+            <div class="col-sm-4"><!--left col-->
+
+              <div class="text-center">
+                {% if profil.photo is defined %}
+                 <img src="{{vich_uploader_asset(profil,'imageFile') }}" class="avatar img-circle" alt="avatar" style=" width:auto; height:144px;">
+                {% else %}
+                  <img src="{{asset('img/login.png')}}" class="avatar img-circle" alt="avatar">  
+                {% endif %}
+                <h6>Upload votre photo...</h6>
+                <input type="file" class="text-center center-block file-upload">
+              </div></hr><br>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
+                <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
+              </div>                
+                <ul class="list-group">
+                  <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+                  {# <li class="list-group-item text-right"><span class="pull-left"><strong>Projet(s) Initié(s)</strong></span> {{profil.projetInitier | length }}</li> #}
+                  <li class="list-group-item text-right"><span class="pull-left"><strong>Projet(s) Participé(s)</strong></span>{% if profil.projetParticiper is defined %} {{profil.projetParticiper | length }} {% endif %}</li>
+                  <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
+                  <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+                </ul>
+                <div class="text-center">
+                  <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalProjetForm">Creer un projet</a>
+                </div>                      
+              <div class="panel panel-default">
+                <div class="panel-heading">Réseaux sociaux</div>
+                <div class="panel-body">
+                  <i class="fa fa-facebook fa-2x"></i>
+                  <i class="fa fa-github fa-2x"></i>
+                  <i class="fa fa-twitter fa-2x"></i>
+                  <i class="fa fa-pinterest fa-2x"></i>
+                  <i class="fa fa-google-plus fa-2x"></i>
+                </div>
+              </div><!-- end panel-->
+            </div><!-- end left col-->
+
+            <!--right col-->
+            <div class="col-sm-8">
+             
+             <ul class="nav nav-tabs nav-justified md-tabs indigo" id="myTabJust" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="home-tab-just" data-toggle="tab" href="#home-just" role="tab" aria-controls="home-just" aria-selected="true">Identification</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab-just" data-toggle="tab" href="#profile-just" role="tab" aria-controls="profile-just" aria-selected="false">Projet</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="contact-tab-just" data-toggle="tab" href="#contact-just" role="tab" aria-controls="contact-just" aria-selected="false">Diplome</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="experience-tab-just" data-toggle="tab" href="#experience-just" role="tab" aria-controls="experience-just" aria-selected="false">Experience</a>
+              </li>
+             </ul>
+            <div class="tab-content card pt-5" id="myTabContentJust">
+              <div class="tab-pane fade show active ml-5" id="home-just" role="tabpanel" aria-labelledby="home-tab-just">
+                <div class="text-center">
+                  {% if profil.id is defined %}
+                   <a href=" {{ path('profil_edit', {'id':profil.id}) }} " class="btn btn-default btn-rounded mb-4">Editer mes informations</a>
+                  {% endif %}
+                </div>
+                <p class="text-center"><h6> {{profil.titre}} </h6> </p>
+                 <h6> Nom: </h6> {{profil.nom}}
+                 <p> <h6> Prenom: </h6> {{profil.prenom}} </p>
+                 <p> <h6> Date de naissance: </h6> {{profil.dateNais | date}} </p>
+                 <p> <h6> Nationalité: </h6> {{profil.pays}} </p>
+                 <p> <h6> Adresse: </h6> {{profil.adresse}} </p>
+                 <p> <h6> Email: </h6> {{app.user.email}} </p>
+                 <p> <h6> Telephone: </h6> {{profil.telephone}} </p>
+
+                <!-- div language -->
+                <div class="row mt-3">
+                 <div class="col-sm-10">
+                  <h5 class="">Language de programmation</h5>
+                   <ul>
+                    {% for language in profil.language %}
+                     <li> {{language.languageId.nom}}:{{language.niveau}}</li>
+                    {% endfor %}
+                   </ul>
+                 </div>
+                 <div class="col-sm-2">
+                  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalLangForm">
+                    <span class="glyphicon glyphicon-plus" ></span> Ajouter
+                  </button>
+                 </div>
+                </div><!-- end language div -->
+                
+
+              </div>
+              <div class="tab-pane fade ml-5" id="profile-just" role="tabpanel" aria-labelledby="profile-tab-just">
+                  <div class="text-center">
+                    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalProjetRForm">Ajouter un projet</a>
+                  </div>
+                 {# {% if profil.projetrealiser is defined %} #}
+                    {% for projet in profil.projetrealiser %}
+                      <h6>{{projet.datedebut | date('M Y') }} : {{projet.datefin | date('M Y') }}</h6>
+                      <p> {{projet.titre}} </p>
+                      <p> {{projet.description}} </p>
+                    {% endfor %}
+                  {% if profil.projetrealiser is empty %}
+                   <h5>Aucun projet renseigné</h5>
+                  {% endif %} 
+              </div>
+              <div class="tab-pane fade ml-5" id="contact-just" role="tabpanel" aria-labelledby="contact-tab-just">
+                  <div class="text-center">
+                    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalDiplomeForm">Ajouter un diplome</a>
+                  </div>
+                    {% for diplome in profil.diplome %}
+                      <h6>{{diplome.date | date('M Y') }}</h6>
+                      <p> {{diplome.titre}} </p>
+                      <p> {{diplome.competence}} </p>
+                    {% endfor %}
+                 {% if profil.diplome is empty %}
+                   <h5>Aucun diplome renseigné</h5>
+                 {% endif %} 
+              </div>
+              <div class="tab-pane fade ml-5" id="experience-just" role="tabpanel" aria-labelledby="experience-tab-just">
+                  <div class="text-center">
+                    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalExperienceForm">Ajouter une experience</a>
+                  </div>
+                  {% for experience in profil.experience %}
+                      <h6>{{experience.debut | date('M Y') }} : {% if experience.fin | date('M Y') %}{{experience.fin | date('M Y') }}{% else %} A present {% endif %} </h6>
+                      <p> {{experience.poste}} </p>
+                      <p> {{experience.entreprise}} </p>
+                      <p> {{experience.description}} </p>
+                  {% endfor %}
+                  {% if profil.projetrealiser is empty %}
+                   <h5>Aucune experience renseigné</h5> 
+                  {% endif %} 
+              </div>
+            </div>
+            </div><!-- end right col-->
+          </div><!-- end second row -->
+
+              <!-- modal experience -->
+            <div class="modal fade" id="modalExperienceForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold">Nouvelle experience</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                {{ form_start(formExperience) }}
+                <div class="modal-body mx-3">
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-user prefix grey-text"></i> #}
+                    {{ form_row(formExperience.poste, {'attr':{'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                  </div>
+
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-tag prefix grey-text"></i> #}
+                    {{ form_row(formExperience.entreprise, {'attr':{'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                  </div>
+
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-envelope prefix grey-text"></i> #}
+                    {{ form_row(formExperience.debut, {'attr':{'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                  </div>
+
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-envelope prefix grey-text"></i> #}
+                    {{ form_row(formExperience.actuelposte, {'attr':{'class':"form-control"}}) }}
+                  </div>
+                  
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-tag prefix grey-text"></i> #}
+                    {{ form_row(formExperience.fin, {'attr':{'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                  </div>
+
+                  <div class="md-form">
+                    {# <i class="fas fa-pencil prefix grey-text"></i> #}
+                    {{ form_row(formExperience.description, {'attr':{'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                  </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button class="btn btn-unique" type="submit">Enregistrer <i class="fas fa-paper-plane-o ml-1"></i></button>
+                </div>
+                {{ form_end(formExperience) }}
+              </div>
+            </div>
+          </div><!-- end modal experience -->
+
+          <!-- modal diplome -->
+            <div class="modal fade" id="modalDiplomeForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold">Nouvelle experience</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                {{ form_start(formDiplome) }}
+                <div class="modal-body mx-3">
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-user prefix grey-text"></i> #}
+                    {{ form_row(formDiplome.titre, {'attr':{'label':"Titre du diplome",'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                  </div>
+
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-tag prefix grey-text"></i> #}
+                    {{ form_row(formDiplome.institut, {'attr':{'label':"Etablissement",'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                  </div>
+
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-envelope prefix grey-text"></i> #}
+                    {{ form_row(formDiplome.date, {'attr':{'label':"Date d'obtention ",'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                  </div>
+
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-envelope prefix grey-text"></i> #}
+                    {{ form_row(formDiplome.competence, {'attr':{'label':"Compétence acquise",'class':"form-control"}}) }}
+                  </div>
+
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-envelope prefix grey-text"></i> #}
+                    {{ form_row(formDiplome.description, {'attr':{'label':"Ajouter si possible une description",'class':"form-control"}}) }}
+                  </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button class="btn btn-unique" type="submit">Enregistrer <i class="fas fa-paper-plane-o ml-1"></i></button>
+                </div>
+                {{ form_end(formDiplome) }}
+              </div>
+            </div>
+          </div><!-- end modal diplome -->
+
+          <!-- modal projet realiser -->
+            <div class="modal fade" id="modalProjetRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold">Nouveau projet</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                {{ form_start(formProjetrealiser) }}
+                <div class="modal-body mx-3">
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-user prefix grey-text"></i> #}
+                    {{ form_row(formProjetrealiser.titre, {'attr':{'label':"Nom du projet",'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                  </div>
+
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-tag prefix grey-text"></i> #}
+                    {{ form_row(formProjetrealiser.datedebut, {'attr':{'label':"Date de debut",'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                  </div>
+
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-envelope prefix grey-text"></i> #}
+                    {{ form_row(formProjetrealiser.datefin, {'attr':{'label':"Date de fin",'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                  </div>
+
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-envelope prefix grey-text"></i> #}
+                    {{ form_row(formProjetrealiser.description, {'attr':{'label':"Description du projet",'class':"form-control"}}) }}
+                  </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button class="btn btn-unique" type="submit">Enregistrer <i class="fas fa-paper-plane-o ml-1"></i></button>
+                </div>
+                {{ form_end(formProjetrealiser) }}
+              </div>
+            </div>
+          </div><!-- end modal projet realiser -->
+
+          <!-- modal language -->
+            <div class="modal fade" id="modalLangForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold">Nouveau language</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                {{ form_start(formLang) }}
+                <div class="modal-body mx-3">
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-user prefix grey-text"></i> #}
+                    {{ form_row(formLang.languageId, {'attr':{'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                  </div>
+
+                  <div class="md-form mb-5">
+                    {# <i class="fas fa-tag prefix grey-text"></i> #}
+                    {{ form_row(formLang.niveau, {'attr':{'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                  </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button class="btn btn-secondary" type="submit">Enregistrer <i class="fas fa-paper-plane-o ml-1"></i></button>
+                </div>
+                {{ form_end(formLang) }}
+              </div>
+            </div>
+          </div><!-- end modal language -->
+
+          <!-- modal projet -->
+          <div class="modal fade" id="modalProjetForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Nouveau language</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  {{ form_start(formProjet) }}
+                  <div class="modal-body mx-3">
+                    <div class="md-form mb-5">
+                      {# <i class="fas fa-user prefix grey-text"></i> #}
+                      {{ form_row(formProjet.nom, {'attr':{'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                    </div>
+
+                    <div class="md-form mb-5">
+                      {# <i class="fas fa-tag prefix grey-text"></i> #}
+                      {{ form_row(formProjet.description, {'attr':{'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                    </div>
+
+                    <div class="md-form mb-5">
+                      {# <i class="fas fa-tag prefix grey-text"></i> #}
+                      {{ form_row(formProjet.participant, {'attr':{'class':"form-control",'data-validation-required-message':"Ce champs est obligatoire"}}) }}
+                    </div>
+
+                  </div>
+                  <div class="modal-footer d-flex justify-content-center">
+                    <button class="btn btn-secondary" type="submit">Enregistrer <i class="fas fa-paper-plane-o ml-1"></i></button>
+                  </div>
+                  {{ form_end(formLang) }}
+                </div>
+              </div>
+          </div><!-- end modal projet -->
+
+          </div><!-- container -->
+
+      {% else %}
+      <div class="container bootstrap snippet mt-5 mb-5">
+        <div class="row mt-5"> <!-- first row -->
+          <div class="col-sm-10 mt-5">
+           <h3>Vous n'avez pas encore renseigner votre profil</h3>
+           <button type="submit"class="btn btn-secondary"><a href="{{path('profil_create') }}">Créer votre profil</a></button>
+          </div>
+        </div>
+      </div>
+        
+      {% endif %}
+
+    {% endblock %}
+
+    {% block Addjavascripts %}      
+       <!-- Custom scripts for this page  -->
+     <script src="{{ asset('js/showprofil/javascript.js') }}"></script>
+    {% endblock %}

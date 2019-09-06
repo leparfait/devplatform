@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Meslanguage index{% endblock %}
+
+{% block body %}
+    <h1>Meslanguage index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Niveau</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for meslanguage in meslanguages %}
+            <tr>
+                <td>{{ meslanguage.id }}</td>
+                <td>{{ meslanguage.niveau }}</td>
+                <td>
+                    <a href="{{ path('meslanguage_show', {'id': meslanguage.id}) }}">show</a>
+                    <a href="{{ path('meslanguage_edit', {'id': meslanguage.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('meslanguage_new') }}">Create new</a>
+{% endblock %}

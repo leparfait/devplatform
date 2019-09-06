@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New MediaVideo{% endblock %}
+
+{% block body %}
+    <h1>Create new MediaVideo</h1>
+
+    {{ include('media_video/_form.html.twig') }}
+
+    <a href="{{ path('media_video_index') }}">back to list</a>
+{% endblock %}
