@@ -108,7 +108,7 @@ class MediaVideo
 
     private function youtubeId($url)
     {
-        $tableaux = explode("=", $url);  // découpe l’url en deux  avec le signe ‘=’
+        $tableaux = explode("=", $url);  // découpe l’url en deux  entourant le signe ‘=’
 
         $this->setIdentif($tableaux[1]);  // ajoute l’identifiant à l’attribut identif
         $this->setType('youtube');  // signale qu’il s’agit d’une video youtube et l’inscrit dans l’attribut $type
@@ -133,7 +133,7 @@ class MediaVideo
     {
         $tableaux = explode("/", $url);  // on découpe l’url grâce au « / »
   
-        $id = $tableaux[count($tableaux)-1];  // on reticent la dernière partie qui contient l’identifiant
+        $id = $tableaux[count($tableaux)-1];  // on retirent la dernière partie qui contient l’identifiant
 
         $this->setIdentif($id);  // ajoute l’identifiant à l’attribut identif
 
