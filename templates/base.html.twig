@@ -47,16 +47,18 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#services">Services</a>
             </li>
-            <li class="nav-item">
+             <!-- lien pour partie dévéloppeur -->
+            <!-- <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#portfolio">Developpeur</a>
-            </li>
+            </li> -->
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="{{ path('projet_index', {'id': app.user.id }) }}">Projet</a>
             </li>
             {% endif %}
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#about">A propos</a>
+               <!-- étape allant de la demande de services à la réalisation-->
+              <a class="nav-link js-scroll-trigger" href="#demarche">Demarche</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#team">Equipe</a>
@@ -65,6 +67,13 @@
               <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
             </li>
           </ul>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+              <button class="btn btn-outline-success my-2 my-sm-0" ><a href="{{ path('show_profil', {'id': app.user.id }) }}">Mon compte</a></button>
+              <button class="btn btn-outline-success my-2 my-sm-0" ><a href="{{ path('fos_user_security_logout')}}">Deconnexion</a></button>
+            {% else %}
+              <button class="btn btn-outline-success my-2 my-sm-0" ><a href="{{ path('fos_user_security_login')}}">Connexion</a></button>
+              <button class="btn btn-outline-success my-2 my-sm-0" ><a href="{{ path('fos_user_registration_register')}}">Incription</a></button>
+            {% endif %}
         </div>
       </div>
     </nav>
@@ -74,19 +83,15 @@
     <header class="masthead">
       <div class="container">
         <div class="intro-text">
-          <div class="intro-lead-in">Bienvenue sur Firedev 
+          <!-- <div class="intro-lead-in">Bienvenue sur Firedev 
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
               {{ app.user.username }}
             {% endif %}
+          </div> -->
+          <div class="intro-lead-in">Trouvez un freelance qualifié et disponible 
           </div>
           <div class="intro-heading text-uppercase">L'univers du code</div>
-          {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ path('show_profil', {'id': app.user.id }) }}">Mon compte</a>
-            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ path('fos_user_security_logout')}}">Deconnexion</a>
-          {% else %}
-            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ path('fos_user_security_login')}}">Connexion</a>
-            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{{ path('fos_user_registration_register')}}">Rejoignez-nous</a>
-          {% endif %}
+          <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="">Revevez un devis gratuitement</a>
         </div>
       </div>
     </header>
@@ -94,32 +99,40 @@
 
 {% block body %}
     <!-- Services -->
-    <section id="services">
-      <div class="container">
-        <div class="row">
+    <!-- <section id="services"> -->
+      <div class="container mt-5" id="services" >
+        <div class="row mb-5">
           <div class="col-lg-12 text-center">
             <h2 class="section-heading text-uppercase">Services</h2>
-            <h3 class="section-subheading text-muted">Firedev met a votre disposition plusieurs services.</h3>
+            <p class="text-justify">Firedev met a votre disposition plusieurs services. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam minus repellendus soluta impedit nisi cupiditate assumenda reprehenderit adipisci numquam, veritatis animi consequuntur laudantium nulla aspernatur neque eveniet magni id veniam!</p>
           </div>
         </div>
         <div class="row text-center">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span class="fa-stack fa-4x">
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
-              <i class="fas fa-desktop fa-stack-1x fa-inverse"></i>
+              <i class="fas fa-globe fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="service-heading">Programmation</h4>
+            <h4 class="service-heading">Application web</h4>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span class="fa-stack fa-4x">
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
-              <i class="fas fa-laptop fa-stack-1x fa-inverse"></i>
+              <i class="fas fa-mobile-alt fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="service-heading">Responsive Design</h4>
+            <h4 class="service-heading">Application mobile</h4>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="service-heading">E-Commerce</h4>
+            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+          </div>
+          <div class="col-md-3">
             <span class="fa-stack fa-4x">
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
               <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
@@ -132,7 +145,7 @@
       <!-- second line -->
       <div class="container">
         <div class="row text-center">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span class="fa-stack fa-4x">
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
               <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
@@ -140,28 +153,42 @@
             <h4 class="service-heading">Web Security</h4>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span class="fa-stack fa-4x">
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
               <i class="fas fa-server fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="service-heading">Administration Reseau</h4>
+            <h4 class="service-heading">Administration Réseau</h4>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <span class="fa-stack fa-4x">
               <i class="fas fa-circle fa-stack-2x text-primary"></i>
-              <i class="fas fa-microphone fa-stack-1x fa-inverse"></i>
+              <i class="fas fa-bullhorn fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 class="service-heading">E-Marketing</h4>
+            <h4 class="service-heading">Web Marketing</h4>
+            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+          </div>
+          <div class="col-md-3">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-bullhorn fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="service-heading">Web Marketing</h4>
             <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
           </div>
         </div>
       </div>
-    </section>
+    <!-- </section> -->
 
-    <!-- Portfolio Grid -->
-    <section class="bg-light" id="portfolio">
+     <div class="row">
+       <div class="col-md-1">
+         <img src="img/webdev.jpg" alt="" width="1300px" height="600px">
+       </div>
+     </div>
+
+    <!-- developpeur section -->
+    <!-- <section class="bg-light" id="portfolio">
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
@@ -184,16 +211,16 @@
           {% endfor %}
         </div>
       </div>
-    </section>
-      <!-- End Portfolio Grid -->
+    </section> -->
+      <!-- End developpeur section -->
 
-    <!-- About -->
-    <section id="about">
-      <div class="container">
-        <div class="row">
+    <!-- demarche section -->
+    <!-- <section id="demarche"> -->
+      <div class="container mt-5" id="demarche" >
+        <div class="row mb-5">
           <div class="col-lg-12 text-center">
-            <h2 class="section-heading text-uppercase">About</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+            <h2 class="section-heading text-uppercase">Etapes</h2>
+            <p class="text-justify">Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore incidunt possimus doloribus neque quae, blanditiis quam eos, quidem at id, magnam veritatis eius dolor odit maiores necessitatibus minus ex in?</p>
           </div>
         </div>
         <div class="row">
@@ -257,21 +284,28 @@
               </li>
               <li class="timeline-inverted">
                 <div class="timeline-image">
-                  <h4>Be Part
-                    <br>Of Our
-                    <br>Story!</h4>
+                  <h4>Tous le monde
+                    <br>est
+                    <br>Satisfait!</h4>
                 </div>
               </li>
             </ul>
           </div>
         </div>
       </div>
-    </section>
+    <!-- </section> -->
+    <!-- demarche section end -->
+
+    <div class="row">
+        <div class="col-md-1">
+          <img src="img/2.jpg" alt="" width="1300px" height="600px">
+        </div>
+    </div>
 
     <!-- Team -->
-    <section class="bg-light" id="team">
-      <div class="container">
-        <div class="row">
+    <!-- <section class="bg-light" id="team"> -->
+      <div class="container mt-5" id="team">
+        <div class="row mb-5">
           <div class="col-lg-12 text-center">
             <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
             <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
@@ -357,7 +391,7 @@
           </div>
         </div>
       </div>
-    </section>
+    <!-- </section> -->
 
     <!-- Clients -->
     <section class="py-5">
@@ -392,9 +426,9 @@
     <section id="contact">
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 text-center">
+          <div class="col-lg-12 text-center mb-3">
             <h2 class="section-heading text-uppercase">Contactez Nous</h2>
-            <h3 class="section-subheading text-muted">Laisser nous un message nous prenons plaisir à vous repondre le plus tot possible.</h3>
+            <h6 class="section-heading"><i>Laisser nous un message nous prendrons plaisir à vous repondre le plus tot possible.</i></h6>
           </div>
         </div>
         <div class="row">
